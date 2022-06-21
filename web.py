@@ -6,7 +6,10 @@ from streamlit_option_menu import option_menu
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2,preprocess_input as mobilenet_v2_preprocess_input
-
+st.write("""
+         # PHÂN LOẠI 18 LOẠI CÁ KOI
+         """
+         )
 model = tf.keras.models.load_model("model.h5") #model m train
 
 ### load file
