@@ -6,6 +6,7 @@ from streamlit_option_menu import option_menu
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2,preprocess_input as mobilenet_v2_preprocess_input
+from PIL import Image
 st.write("""
          # PHÂN LOẠI 18 LOẠI CÁ KOI
          """
@@ -21,6 +22,8 @@ classes = ['Kohaku', 'Ginrin', 'Goshiki', 'Hikarimuji', 'Hikarimoyo', 'Kumonryu'
 if uploaded_file is not None:
     # Convert the file
     img = image.load_img(uploaded_file,target_size=(224,224)) 
+    image = Image.open(uploaded_file)
+    st.image(image, use_column_width=True)
     img = img_to_array(img)
     img = img.reshape(1,224,224,3)
     img = img.astype('float32')
