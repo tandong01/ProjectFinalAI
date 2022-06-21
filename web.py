@@ -7,28 +7,26 @@ from tensorflow.keras.preprocessing.image import img_to_array, load_img
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2,preprocess_input as mobilenet_v2_preprocess_input
 
-model = tf.keras.models.load_model("Hue.h5") #model m train
+model = tf.keras.models.load_model("model.h5") #model m train
 
 ### load file
 uploaded_file = st.file_uploader("Choose an image file", type=["jpg","jpeg","png"])
 
-map_dict = {0: 'NORMAL',
-            1: 'PNEUMONIA'} #vì của t có 2 laoij là bệnh với ko bị bệnh nên t làm cái này, cái này sẽ tùy vô giải thuật của m
-    
+classes = ['Kohaku', 'Ginrin', 'Goshiki', 'Hikarimuji', 'Hikarimoyo', 'Kumonryu', 'Kujaku', 'Doitsu', 'Chagoi',
+               'Ochiba', 'Taisho Sanke', 'Showa ', 'Utsuri', 'Bekko', 'Asagi', 'Shusui', 'Tancho', 'Goromo']
  
 if uploaded_file is not None:
     # Convert the file
-    img = image.load_img(uploaded_file,target_size=(64,64)) #xử lí ảnh theo cách m làm
-    st.image(uploaded_file, channels="RGB") #hiển thị ảnh
+    img = image.load_img(uploaded_file,target_size=(224,224)) 
     img = img_to_array(img)
-    img = img.reshape(1,64,64,3)
+    img = img.reshape(1,224,224,3)
     img = img.astype('float32')
     img = img/255
         
     #Button: nút dự đoán sau khi up ảnh
-    Genrate_pred = st.button("Generate Prediction") 
+    Genrate_pred = st.button("Dự đoán") 
     
     if Genrate_pred:
     
         prediction = model.predict(img).argmax()
-        st.write("**Predicted Label for the image is {}**".format(map_dict [prediction])) ##đưa ra dự đoán viêm phổi hay ko
+        st.write("Kết quả dự đoán của hình này là:{}**".format(classes [prediction])) 
