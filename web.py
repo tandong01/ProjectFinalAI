@@ -35,5 +35,5 @@ if uploaded_file is not None:
     if Genrate_pred:
     
         prediction = model.predict(img).argmax()
-        st.write(**"Kết quả dự đoán của hình này là:{}**".format(classes [prediction])) 
+        st.write("""Kết quả dự đoán của hình này là:{}""".format(classes [prediction])) 
         st.write("Độ chính xác là:{} %".format(prediction))
